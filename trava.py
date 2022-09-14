@@ -9,15 +9,15 @@ Original file is located at
 
 from datetime import datetime, timezone, timedelta
 import time
-from dbControle import encontrarPessoa, inserirEntradaSaida
+from dbControle import encontrarPessoa, inserirEntradaSaida, ultimo_valor
 from trava_completa import *
 
 
 # verficando se o usuário quer abrir ou fechar a porta, com repetição caso ele não digite um valor válido
-abrir_fechar = 0 
-while abrir_fechar != 1 and abrir_fechar != 2:
-  abrir_fechar = int(input('[1] Abrir // [2] Fechar: '))
-  print('Digite um valor válido')
+# abrir_fechar = 0 
+# while abrir_fechar != 1 and abrir_fechar != 2:
+#   abrir_fechar = int(input('[1] Abrir // [2] Fechar: '))
+#   print('Digite um valor válido')
   
 # Recebendo os inputs do usuário
 a = 1
@@ -26,7 +26,9 @@ while a != 0:
   senha = ''
   # loop para inserir id (matricula)
   while True:
+    lcd.clear()
     lcd.message('Digite seu ID:')
+    lcd.set_cursor(1,0)
     lcd.message(matricula)
     matricula += leituraLCD(linhas[0],["1","2","3","A"])
     matricula += leituraLCD(linhas[1],["4","5","6","B"])
@@ -42,7 +44,9 @@ while a != 0:
 
   # loop para inserir senha
   while True:
+    lcd.clear()
     lcd.message('Digite a senha:')
+    lcd.set_cursor(1,0)
     lcd.message(senha)
     senha += leituraLCD(linhas[0],["1","2","3","A"])
     senha += leituraLCD(linhas[1],["4","5","6","B"])
@@ -58,18 +62,21 @@ while a != 0:
 
   encontrado = encontrarPessoa(matricula, senha)
   if (encontrado == None): 
+    lcd.clear()
     lcd.message('Digite novamente')
     time.sleep(0.3)#Sensibilidade
   else:
     a = 0
 
+ultimaAcao = ultimo_valor()
+
 now = datetime.now()
 timestamp = int(datetime.timestamp(now))
 
-if abrir_fechar == 1:
-  abrir_fechar = 'Entrada'
-elif abrir_fechar == 2:
+if ultimaAcao[3] == 'Entrada':
   abrir_fechar = 'Saída'
+elif ultimaAcao[3] == 'Saída':
+  abrir_fechar = 'Entrada'
   
 # logica de abrir e fechar porta
 

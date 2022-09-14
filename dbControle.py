@@ -69,5 +69,10 @@ def pegarTabela():
 
   return tabela
 
+def ultimo_valor():
+  cur.execute("SELECT * FROM entrada_saida ORDER BY horario DESC")
+  valor = cur.fetchone()
+
+  return valor
 ## Chamar as funções aqui embaixo caso seja necessario alguma delas
 # sequencia -> criar, inserir dados
