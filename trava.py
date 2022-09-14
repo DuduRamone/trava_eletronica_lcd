@@ -19,8 +19,8 @@ from trava_completa import *
 #   abrir_fechar = int(input('[1] Abrir // [2] Fechar: '))
 #   print('Digite um valor válido')
   
-
-GPIO.setup(14, GPIO.OUT)
+pino_saida = 26
+GPIO.setup(pino_saida, GPIO.OUT)
 
 # Recebendo os inputs do usuário
 a = 1
@@ -80,10 +80,10 @@ timestamp = int(datetime.timestamp(now))
 
 if ultimaAcao[3] == 'Entrada':
   abrir_fechar = 'Saída'
-  GPIO.output(14,GPIO.LOW)
+  GPIO.output(pino_saida,GPIO.LOW)
 elif ultimaAcao[3] == 'Saída':
   abrir_fechar = 'Entrada'
-  GPIO.output(14,GPIO.HIGH)
+  GPIO.output(pino_saida,GPIO.HIGH)
   
 # logica de abrir e fechar porta
 
