@@ -17,7 +17,6 @@ def criarTabelaDados():
 def criaTabelaES():
   cur.execute('''
   CREATE TABLE IF NOT EXISTS entrada_saida (
-    id INTEGER PRIMARY KEY AUTOINCREMENT, 
     horario DATETIME, 
     nome TEXT,
     acao TEXT
@@ -25,11 +24,11 @@ def criaTabelaES():
   )
 
 # inserir dados na tabela de dados
-#data = [
+# data = [
 #  (20200099305, "Thullyo", '1235'),
 #  (20210054405, "Breno Rocha Fonseca", '124578'),
 #  (20210029206, "Newton Leonardo Leite Filho" , '218100'),
-#]
+# ]
 def inserirDados(data):
   cur.executemany("INSERT INTO dados VALUES(?, ?, ?)", data)
   con.commit()
@@ -37,6 +36,7 @@ def inserirDados(data):
 # alterar dados na tabela de dados
 # matricula = 0
 # senha = ''
+
 
 def atualizarDados(matricula, senha):
   dados = [senha, matricula]
@@ -59,7 +59,7 @@ def encontrarPessoa(matricula, senha):
 
 # criar entrada na tabela de acao
 def inserirEntradaSaida(data):
-  cur.executemany("INSERT INTO entrada_saida VALUES(?, ?, ?)", data)
+  cur.executemany("INSERT INTO entrada_saida VALUES (?, ?, ?)", data)
   con.commit()
 
 # pegar tabela de entrada e saida
